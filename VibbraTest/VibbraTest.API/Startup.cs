@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning.Conventions;
@@ -8,7 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.IO;
 using VibbraTest.API.Extensions;
+using VibbraTest.Domain.Exceptions;
 
 namespace VibbraTest.API
 {
@@ -38,8 +42,7 @@ namespace VibbraTest.API
         {
             app.UseResponseCompression();
 
-            if (env.IsDevelopment())
-                app.UseDeveloperExceptionPage();
+            app.UseExceptionHandlerVibbra(env);
 
             app.UseSwaggerVibbra(provider);
 
