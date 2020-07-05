@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VibbraTest.Domain.Base;
 using VibbraTest.Domain.Customers;
 using VibbraTest.Domain.Customers.Commands;
 using VibbraTest.Domain.Customers.Dtos;
@@ -23,18 +24,11 @@ namespace VibbraTest.API.Controllers.v1
             _customerService = customerService;
         }
 
-        //[HttpGet]
-        //public async Task<List<CustomerDto>> Get()
-        //{
-        //    var customer = await _customerRepository.GetAll();
-        //    return customer.Select(x => ConvertToDto(x)).ToList();
-        //}
-
         [HttpGet]
-        public async Task<List<CustomerDto>> Get([FromQuery]CustomersFilter filter)
+        public async Task<CustomerListDto> Get([FromQuery]CustomersFilter filter)
         {
             var customer = await _customerRepository.GetAll(filter);
-            return customer.Select(x => ConvertToDto(x)).ToList();
+            return new CustomerListDto(customer.Select(x => ConvertToDto(x)).ToList());
         }
 
         [HttpGet("{id}")]
