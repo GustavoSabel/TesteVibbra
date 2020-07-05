@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VibbraTest.API.Dtos;
 using VibbraTest.Domain.Base;
 using VibbraTest.Domain.Customers;
 using VibbraTest.Domain.Customers.Commands;
@@ -36,7 +37,7 @@ namespace VibbraTest.API.Controllers.v1
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMessage))]
         public async Task<ActionResult<CustomerDto>> Get(int id)
         {
-            var customer = await _customerRepository.Get(id);
+            var customer = await _customerRepository.GetAsync(id);
             if (customer == null)
                 return BadRequest(new ErrorMessage($"Empresa não encontrada"));
             return ConvertToDto(customer);
@@ -45,10 +46,10 @@ namespace VibbraTest.API.Controllers.v1
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMessage))]
-        public async Task<ActionResult<CustomerDto>> Post(InsertUpdateCustomerCommand command)
+        public async Task<ActionResult<CreatedEntityResult>> Post(InsertUpdateCustomerCommand command)
         {
             var customer = await _customerService.InsertAsync(command);
-            return Created(ConvertToDto(customer));
+            return new CreatedEntityResult(customer.Id);
         }
 
         [HttpPut("{id}")]

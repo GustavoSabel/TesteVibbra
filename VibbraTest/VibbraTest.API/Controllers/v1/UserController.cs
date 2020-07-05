@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VibbraTest.API.Dtos;
 using VibbraTest.Domain.Entity;
 using VibbraTest.Domain.Users;
 using VibbraTest.Domain.Users.Dtos;
@@ -34,7 +35,7 @@ namespace VibbraTest.API.Controllers.v1
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMessage))]
         public async Task<ActionResult<UserDto>> Get(int id)
         {
-            var user = await _userRepository.Get(id);
+            var user = await _userRepository.GetAsync(id);
             if (user == null)
                 return BadRequest(new ErrorMessage($"Usuário não encontrado"));
             return ConvertToDto(user);
@@ -43,10 +44,10 @@ namespace VibbraTest.API.Controllers.v1
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMessage))]
-        public async Task<ActionResult<UserDto>> Post(InsertUpdateUserCommand command)
+        public async Task<ActionResult<CreatedEntityResult>> Post(InsertUpdateUserCommand command)
         {
             var user = await _userService.InsertAsync(command);
-            return Created(ConvertToDto(user));
+            return new CreatedEntityResult(user.Id);
         }
 
         [HttpPut("{id}")]

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
+using VibbraTest.API.Dtos;
 using VibbraTest.Domain.Category;
 using VibbraTest.Domain.Category.Commands;
 using VibbraTest.Domain.Category.Dtos;
@@ -34,7 +35,7 @@ namespace VibbraTest.API.Controllers.v1
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMessage))]
         public async Task<ActionResult<CategoryDto>> Get(int id)
         {
-            var category = await _categoryRepository.Get(id);
+            var category = await _categoryRepository.GetAsync(id);
             if (category == null)
                 return BadRequest(new ErrorMessage($"Categoria não encontrada"));
             return ConvertToDto(category);
@@ -43,10 +44,10 @@ namespace VibbraTest.API.Controllers.v1
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMessage))]
-        public async Task<ActionResult<CategoryDto>> Post(InsertUpdateCategoryCommand command)
+        public async Task<ActionResult<CreatedEntityResult>> Post(InsertUpdateCategoryCommand command)
         {
             var category = await _categoryService.InsertAsync(command);
-            return Created(ConvertToDto(category));
+            return new CreatedEntityResult(category.Id);
         }
 
         [HttpPut("{id}")]

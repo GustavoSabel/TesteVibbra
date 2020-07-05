@@ -36,7 +36,7 @@ namespace VibbraTest.Domain.Category
         {
             command.Name = command.Name.Trim();
 
-            var category = await _categoryRepository.Get(id);
+            var category = await _categoryRepository.GetAsync(id);
             if (category == null)
                 throw new EntityNotFoundException("Categoria não encontrado");
 
@@ -56,7 +56,7 @@ namespace VibbraTest.Domain.Category
 
         public async Task ArchiveAsync(int id)
         {
-            var category = await _categoryRepository.Get(id);
+            var category = await _categoryRepository.GetAsync(id);
             if (category == null)
                 throw new EntityNotFoundException("Empresa não encontrado");
 

@@ -5,6 +5,7 @@ using System.Reflection;
 using VibbraTest.Domain.Category;
 using VibbraTest.Domain.Customers;
 using VibbraTest.Domain.Entity;
+using VibbraTest.Domain.Revenues;
 
 namespace VibbraTest.Infra
 {
@@ -13,6 +14,7 @@ namespace VibbraTest.Infra
         public DbSet<User> User { get; set; }
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Category> Category { get; set; }
+        public DbSet<Revenue> Revenue { get; set; }
 
         public VibbraContext(DbContextOptions<VibbraContext> options) : base(options) { }
 

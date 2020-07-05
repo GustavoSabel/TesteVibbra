@@ -38,7 +38,7 @@ namespace VibbraTest.Domain.Customers
         {
             var cnpj = new Cnpj(command.Cnpj);
 
-            var customer = await _customerRepository.Get(id);
+            var customer = await _customerRepository.GetAsync(id);
             if (customer == null)
                 throw new EntityNotFoundException("Empresa não encontrado");
 
@@ -59,7 +59,7 @@ namespace VibbraTest.Domain.Customers
 
         public async Task ArchiveAsync(int id)
         {
-            var customer = await _customerRepository.Get(id);
+            var customer = await _customerRepository.GetAsync(id);
             if (customer == null)
                 throw new EntityNotFoundException("Empresa não encontrado");
 

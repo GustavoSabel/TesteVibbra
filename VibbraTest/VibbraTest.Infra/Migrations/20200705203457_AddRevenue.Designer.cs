@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VibbraTest.Infra;
 
 namespace VibbraTest.Infra.Migrations
 {
     [DbContext(typeof(VibbraContext))]
-    partial class VibbraContextModelSnapshot : ModelSnapshot
+    [Migration("20200705203457_AddRevenue")]
+    partial class AddRevenue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,7 +128,7 @@ namespace VibbraTest.Infra.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("AccrualDate")
-                        .HasColumnType("DATE");
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(13,4)");
@@ -145,7 +147,7 @@ namespace VibbraTest.Infra.Migrations
                         .HasMaxLength(100);
 
                     b.Property<DateTime>("TransactionDate")
-                        .HasColumnType("DATE");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using VibbraTest.Domain.Base;
+using VibbraTest.Domain.Exceptions;
 
 namespace VibbraTest.Infra.Base
 {
@@ -17,7 +18,20 @@ namespace VibbraTest.Infra.Base
 
         public void Add(T entity) => Set.Add(entity);
 
-        public ValueTask<T> Get(int id) => Set.FindAsync(id);
+        public ValueTask<T> GetAsync(int id) => Set.FindAsync(id);
+
+        public async Task RemoveAsync(int id)
+        {
+            var entity = await GetAsync(id);
+            if (entity == null)
+                throw new BusinessException($"Entidade {id} não encontrada");
+            Set.Remove(entity);
+        }
+
+        public void Remove(T entity)
+        {
+            Set.Remove(entity);
+        }
 
         public Task SaveChangesAsync() => Context.SaveChangesAsync();
     }

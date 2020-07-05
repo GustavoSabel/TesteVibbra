@@ -8,11 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
 using VibbraTest.API.Extensions;
-using VibbraTest.Domain.Category;
-using VibbraTest.Domain.Customers;
-using VibbraTest.Domain.Users;
 using VibbraTest.Infra;
-using VibbraTest.Infra.Repositories;
 
 namespace VibbraTest.API
 {
@@ -51,19 +47,7 @@ namespace VibbraTest.API
                 VibbraContext.Configurar(options, Configuration.GetConnectionString("Default"), WebHostEnvironmen.IsDevelopment());
             });
 
-            AddServicesAndRepositores(services);
-        }
-
-        private static void AddServicesAndRepositores(IServiceCollection services)
-        {
-            services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<UserService>();
-
-            services.AddTransient<ICustomerRepository, CustomerRepository>();
-            services.AddTransient<CustomerService>();
-
-            services.AddTransient<ICategoryRepository, CategoryRepository>();
-            services.AddTransient<CategoryService>();
+            services.AddRepositoriesAndServices();
         }
 
         private BadRequestObjectResult CustomModelValidationResponse(ActionContext actionContext)

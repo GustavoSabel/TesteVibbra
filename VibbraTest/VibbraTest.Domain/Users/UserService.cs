@@ -46,7 +46,7 @@ namespace VibbraTest.Domain.Users
             var cnpj = new Cnpj(command.Cnpj);
             var email = new Email(command.Email);
 
-            var user = await _userRepository.Get(id);
+            var user = await _userRepository.GetAsync(id);
             if (user == null)
                 throw new EntityNotFoundException("Usuário não encontrado");
 
