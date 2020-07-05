@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using VibbraTest.Domain.Category;
+using VibbraTest.Domain.Configuration;
 using VibbraTest.Domain.Customers;
 using VibbraTest.Domain.Revenues;
 using VibbraTest.Domain.Users;
@@ -22,6 +23,9 @@ namespace VibbraTest.API.Extensions
 
             services.AddTransient<IRevenueRepository, RevenueRepository>();
             services.AddTransient<RevenueService>();
+
+            services.AddTransient<IConfigurationRepository, ConfigurationRepository>();
+            services.AddTransient<ConfigurationService>();
         }
     }
 }

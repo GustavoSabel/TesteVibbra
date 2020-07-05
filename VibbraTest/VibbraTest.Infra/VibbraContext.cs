@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Reflection;
 using VibbraTest.Domain.Category;
+using VibbraTest.Domain.Configuration;
 using VibbraTest.Domain.Customers;
 using VibbraTest.Domain.Entity;
 using VibbraTest.Domain.Revenues;
@@ -15,6 +16,7 @@ namespace VibbraTest.Infra
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Revenue> Revenue { get; set; }
+        public DbSet<Configuration> Configuration { get; set; }
 
         public VibbraContext(DbContextOptions<VibbraContext> options) : base(options) { }
 
@@ -80,6 +82,12 @@ namespace VibbraTest.Infra
                 Id = 1,
                 Name = "Admin",
                 Password = "Admin",
+            });
+
+            modelBuilder.Entity<Configuration>().HasData(new Configuration
+            {
+                Id = 1,
+                MaxRevenueAmount = 10000
             });
         }
     }
