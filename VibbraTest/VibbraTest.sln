@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VibbraTest.API", "VibbraTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VibbraTest.Domain", "VibbraTest.Domain\VibbraTest.Domain.csproj", "{9682CFA8-9B8D-46B3-B24B-793094EFDB05}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VibbraTest.Infra", "VibbraTest.Infra\VibbraTest.Infra.csproj", "{51841B71-442C-461E-B505-86C3C0B7AE02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9682CFA8-9B8D-46B3-B24B-793094EFDB05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9682CFA8-9B8D-46B3-B24B-793094EFDB05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9682CFA8-9B8D-46B3-B24B-793094EFDB05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51841B71-442C-461E-B505-86C3C0B7AE02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51841B71-442C-461E-B505-86C3C0B7AE02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51841B71-442C-461E-B505-86C3C0B7AE02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51841B71-442C-461E-B505-86C3C0B7AE02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

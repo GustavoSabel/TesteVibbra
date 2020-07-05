@@ -1,29 +1,27 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.AspNetCore.Mvc.Versioning.Conventions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using System.IO;
 using VibbraTest.API.Extensions;
-using VibbraTest.Domain.Exceptions;
+using VibbraTest.Domain.Users;
+using VibbraTest.Infra;
+using VibbraTest.Infra.Repositories;
 
 namespace VibbraTest.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironmen)
         {
             Configuration = configuration;
+            WebHostEnvironmen = webHostEnvironmen;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment WebHostEnvironmen { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -36,6 +34,13 @@ namespace VibbraTest.API
             services.AddSwaggerVibbra();
 
             services.AddResponseCompression();
+
+            services.AddDbContext<VibbraContext>(options =>
+            {
+                VibbraContext.Configurar(options, Configuration.GetConnectionString("Default"), WebHostEnvironmen.IsDevelopment());
+            }); 
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<UserService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
@@ -50,10 +55,16 @@ namespace VibbraTest.API
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
+
+            MigrarBancoDados(app);
+        }
+
+        private static void MigrarBancoDados(IApplicationBuilder app)
+        {
+            using var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope();
+            var context = serviceScope.ServiceProvider.GetRequiredService<VibbraContext>();
+            context.Database.Migrate();
         }
     }
 }
