@@ -43,7 +43,7 @@ namespace VibbraTest.API.Controllers.v1
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMessage))]
-        public async Task<ActionResult<UserDto>> Post(InsertUserCommand command)
+        public async Task<ActionResult<UserDto>> Post(InsertUpdateUserCommand command)
         {
             var user = await _userService.InsertAsync(command);
             return Created(ConvertToDto(user));
@@ -52,7 +52,7 @@ namespace VibbraTest.API.Controllers.v1
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMessage))]
-        public async Task<IActionResult> Put(int id, UpdateUserCommand command)
+        public async Task<IActionResult> Put(int id, InsertUpdateUserCommand command)
         {
             await _userService.UpdateAsync(id, command);
             return NoContent();

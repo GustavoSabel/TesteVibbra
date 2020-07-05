@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Reflection;
+using VibbraTest.Domain.Customers;
 using VibbraTest.Domain.Entity;
 
 namespace VibbraTest.Infra
@@ -9,6 +10,7 @@ namespace VibbraTest.Infra
     public class VibbraContext : DbContext
     {
         public DbSet<User> User { get; set; }
+        public DbSet<Customer> Customer { get; set; }
 
         public VibbraContext(DbContextOptions<VibbraContext> options) : base(options) { }
 

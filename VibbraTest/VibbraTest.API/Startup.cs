@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using VibbraTest.API.Extensions;
+using VibbraTest.Domain.Customers;
 using VibbraTest.Domain.Users;
 using VibbraTest.Infra;
 using VibbraTest.Infra.Repositories;
@@ -45,8 +46,12 @@ namespace VibbraTest.API
             {
                 VibbraContext.Configurar(options, Configuration.GetConnectionString("Default"), WebHostEnvironmen.IsDevelopment());
             });
+
             services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<UserService>();
+            services.AddTransient<UserService>(); 
+            
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<CustomerService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)

@@ -14,7 +14,7 @@ namespace VibbraTest.Domain.Users
             _userRepository = userRepository;
         }
 
-        public async Task<User> InsertAsync(InsertUserCommand command)
+        public async Task<User> InsertAsync(InsertUpdateUserCommand command)
         {
             var cnpj = new Cnpj(command.Cnpj);
             var email = new Email(command.Email);
@@ -41,7 +41,7 @@ namespace VibbraTest.Domain.Users
             return user;
         }
 
-        public async Task<User> UpdateAsync(int id, UpdateUserCommand command)
+        public async Task<User> UpdateAsync(int id, InsertUpdateUserCommand command)
         {
             var cnpj = new Cnpj(command.Cnpj);
             var email = new Email(command.Email);
