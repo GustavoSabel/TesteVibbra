@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using VibbraTest.Domain.Entity;
+using VibbraTest.Domain.Exceptions;
 
 namespace VibbraTest.Domain.Users
 {
@@ -12,29 +13,38 @@ namespace VibbraTest.Domain.Users
             _userRepository = userRepository;
         }
 
-        public Task InsertAsync(InsertUserCommand user)
+        public async Task<User> InsertAsync(InsertUserCommand command)
         {
-            _userRepository.Add(new User
+            var user = new User
             {
-                Nome = user.Nome,
-                CompanyName = user.CompanyName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                Cnpj = user.Cnpj,
-                Password = user.Password,
-            });
-            return _userRepository.SaveChangesAsync();
+                Nome = command.Nome,
+                CompanyName = command.CompanyName,
+                Email = command.Email,
+                PhoneNumber = command.PhoneNumber,
+                Cnpj = command.Cnpj,
+                Password = command.Password,
+            };
+            _userRepository.Add(user);
+            await _userRepository.SaveChangesAsync();
+            return user;
         }
 
-        public async Task UpdateAsync(int id, UpdateUserCommand userUpated)
+        public async Task<User> UpdateAsync(int id, UpdateUserCommand command)
         {
             var user = await _userRepository.Get(id);
-            user.Nome = userUpated.Nome;
-            user.PhoneNumber = userUpated.PhoneNumber;
-            user.Email = userUpated.Email;
-            user.CompanyName = userUpated.CompanyName;
+            if (user == null)
+                throw new EntityNotFoundException("Usuário não encontrado");
+
+            user.Nome = command.Nome;
+            user.PhoneNumber = command.PhoneNumber;
+            user.Email = command.Email;
+            user.CompanyName = command.CompanyName;
+            user.Cnpj = command.Cnpj;
+            if (command.Password != null)
+                user.Password = command.Password;
 
             await _userRepository.SaveChangesAsync();
+            return user;
         }
     }
 }

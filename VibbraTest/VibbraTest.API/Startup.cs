@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -25,9 +26,14 @@ namespace VibbraTest.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                    options.JsonSerializerOptions.PropertyNamingPolicy = SnakeCaseNamingPolicy.Instance);
 
-            services.AddMvc(opt => opt.UseGeneralRoutePrefix("api/v{version:apiVersion}"));
+            services.AddMvc(opt =>
+            {
+                opt.UseGeneralRoutePrefix("api/v{version:apiVersion}");
+            });
 
             services.AddVersioningVibbra();
 
@@ -38,7 +44,7 @@ namespace VibbraTest.API
             services.AddDbContext<VibbraContext>(options =>
             {
                 VibbraContext.Configurar(options, Configuration.GetConnectionString("Default"), WebHostEnvironmen.IsDevelopment());
-            }); 
+            });
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<UserService>();
         }

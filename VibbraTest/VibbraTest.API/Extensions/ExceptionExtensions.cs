@@ -20,29 +20,28 @@ namespace VibbraTest.API.Extensions
 
                     if (exceptionHandlerPathFeature?.Error != null)
                     {
-                        if (exceptionHandlerPathFeature.Error is InvalidEntityException ex)
+                        if (exceptionHandlerPathFeature.Error is BusinessException ex)
                         {
-                            var errorMessage = new ErrorMessage() { Error = ex.Message };
+                            var errorMessage = new ErrorMessage(ex.Message);
 
                             context.Response.StatusCode = 400;
                             context.Response.ContentType = "application/json";
                             await context.Response.WriteAsync(JsonSerializer.Serialize(errorMessage));
                             return;
                         }
-                        else
+
+                        if (env.IsDevelopment())
                         {
-                            if (env.IsDevelopment())
-                            {
-                                context.Response.StatusCode = 500;
-                                context.Response.ContentType = "text/html";
-                                await context.Response.WriteAsync(exceptionHandlerPathFeature.Error.ToString());
-                                return;
-                            }
+                            context.Response.StatusCode = 500;
+                            context.Response.ContentType = "text/html";
+                            await context.Response.WriteAsync(exceptionHandlerPathFeature.Error.ToString());
+                            return;
                         }
                     }
 
                     context.Response.StatusCode = 500;
-                    context.Response.ContentType = "Some error occurred";
+                    context.Response.ContentType = "text/html";
+                    context.Response.ContentType = "An error occurred";
                 });
             });
         }
