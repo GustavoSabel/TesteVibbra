@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using VibbraTest.Domain.Entity;
 using VibbraTest.Domain.Exceptions;
+using VibbraTest.Domain.ValueObjects;
 
 namespace VibbraTest.Domain.Users
 {
@@ -15,13 +16,24 @@ namespace VibbraTest.Domain.Users
 
         public async Task<User> InsertAsync(InsertUserCommand command)
         {
+            var cnpj = new Cnpj(command.Cnpj);
+            var email = new Email(command.Email);
+
+            var userExisting = await _userRepository.GetByEmailAsync(email);
+            if (userExisting != null)
+                throw new InvalidEntityException($"Já existe um usuário com o e-mail {command.Email}");
+
+            userExisting = await _userRepository.GetByEmailCnpj(cnpj);
+            if (userExisting != null)
+                throw new InvalidEntityException($"Já existe um usuário com o CNPJ {cnpj}");
+
             var user = new User
             {
                 Nome = command.Nome,
                 CompanyName = command.CompanyName,
-                Email = command.Email,
+                Email = email,
                 PhoneNumber = command.PhoneNumber,
-                Cnpj = command.Cnpj,
+                Cnpj = cnpj,
                 Password = command.Password,
             };
             _userRepository.Add(user);
@@ -31,15 +43,32 @@ namespace VibbraTest.Domain.Users
 
         public async Task<User> UpdateAsync(int id, UpdateUserCommand command)
         {
+            var cnpj = new Cnpj(command.Cnpj);
+            var email = new Email(command.Email);
+
             var user = await _userRepository.Get(id);
             if (user == null)
                 throw new EntityNotFoundException("Usuário não encontrado");
 
+            if (user.Email != email)
+            {
+                var userExisting = await _userRepository.GetByEmailAsync(email);
+                if (userExisting != null)
+                    throw new InvalidEntityException($"Já existe um usuário com o e-mail {email}");
+            }
+
+            if (user.Cnpj != cnpj)
+            {
+                var userExisting = await _userRepository.GetByEmailCnpj(cnpj);
+                if (userExisting != null)
+                    throw new InvalidEntityException($"Já existe um usuário com o CNPJ {cnpj}");
+            }
+
             user.Nome = command.Nome;
             user.PhoneNumber = command.PhoneNumber;
-            user.Email = command.Email;
+            user.Email = email;
             user.CompanyName = command.CompanyName;
-            user.Cnpj = command.Cnpj;
+            user.Cnpj = cnpj;
             if (command.Password != null)
                 user.Password = command.Password;
 

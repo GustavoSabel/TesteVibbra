@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using VibbraTest.Domain.Entity;
 using VibbraTest.Domain.Users;
+using VibbraTest.Domain.ValueObjects;
 using VibbraTest.Infra.Base;
 
 namespace VibbraTest.Infra.Repositories
@@ -16,6 +17,16 @@ namespace VibbraTest.Infra.Repositories
         public Task<List<User>> GetAll()
         {
             return Set.ToListAsync();
+        }
+
+        public Task<User> GetByEmailAsync(Email email)
+        {
+            return Set.FirstOrDefaultAsync(x => x.Email == email);
+        }
+
+        public Task<User> GetByEmailCnpj(Cnpj cnpj)
+        {
+            return Set.FirstOrDefaultAsync(x => x.Cnpj == cnpj);
         }
     }
 }

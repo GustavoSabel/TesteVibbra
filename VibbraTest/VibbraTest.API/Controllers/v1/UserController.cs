@@ -63,9 +63,9 @@ namespace VibbraTest.API.Controllers.v1
             return new UserDto
             {
                 Id = user.Id,
-                Cnpj = user.Cnpj,
+                Cnpj = user.Cnpj?.ToString(),
                 CompanyName = user.CompanyName,
-                Email = user.Email,
+                Email = user.Email?.ToString(),
                 Nome = user.Nome,
                 PhoneNumber = user.PhoneNumber
             };

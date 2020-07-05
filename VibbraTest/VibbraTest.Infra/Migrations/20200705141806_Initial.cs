@@ -13,9 +13,9 @@ namespace VibbraTest.Infra.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
-                    Email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
+                    Email = table.Column<string>(maxLength: 100, nullable: true),
                     Password = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
-                    Cnpj = table.Column<string>(type: "varchar(14)", maxLength: 14, nullable: true),
+                    Cnpj = table.Column<string>(type: "CHAR(14)", nullable: true),
                     CompanyName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
                     PhoneNumber = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true)
                 },

@@ -26,15 +26,14 @@ namespace VibbraTest.Infra.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Cnpj")
-                        .HasColumnType("varchar(14)")
-                        .HasMaxLength(14);
+                        .HasColumnType("CHAR(14)");
 
                     b.Property<string>("CompanyName")
                         .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("Email")
-                        .HasColumnType("varchar(100)")
+                        .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("Nome")
