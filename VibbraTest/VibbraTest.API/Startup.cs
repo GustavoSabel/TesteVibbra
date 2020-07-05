@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Linq;
 using VibbraTest.API.Extensions;
 using VibbraTest.Domain.Customers;
 using VibbraTest.Domain.Users;
@@ -28,6 +29,8 @@ namespace VibbraTest.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers()
+                .ConfigureApiBehaviorOptions(opt => 
+                    opt.InvalidModelStateResponseFactory = actionContext => CustomModelValidationResponse(actionContext))
                 .AddJsonOptions(options =>
                     options.JsonSerializerOptions.PropertyNamingPolicy = SnakeCaseNamingPolicy.Instance);
 
@@ -52,6 +55,18 @@ namespace VibbraTest.API
             
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<CustomerService>();
+        }
+
+        private BadRequestObjectResult CustomModelValidationResponse(ActionContext actionContext)
+        {
+            var fieldValidations = actionContext.ModelState
+                 .Where(modelError => modelError.Value.Errors.Count > 0)
+                 .Select(x => new FieldValidation(x.Key, x.Value.Errors.FirstOrDefault().ErrorMessage))
+                 .ToArray();
+
+            var errorMessage = new ErrorMessage("Alguns campos estão inválidos", fieldValidations);
+
+            return new BadRequestObjectResult(errorMessage);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)

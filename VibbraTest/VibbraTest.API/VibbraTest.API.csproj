@@ -24,5 +24,9 @@
     <ProjectReference Include="..\VibbraTest.Infra\VibbraTest.Infra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\" />
+  </ItemGroup>
+
 
 </Project>

@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VibbraTest.API.Dtos;
 using VibbraTest.Domain.Entity;
 using VibbraTest.Domain.Users;
+using VibbraTest.Domain.Users.Dtos;
 
 namespace VibbraTest.API.Controllers.v1
 {
@@ -66,7 +66,7 @@ namespace VibbraTest.API.Controllers.v1
                 Cnpj = user.Cnpj?.ToString(),
                 CompanyName = user.CompanyName,
                 Email = user.Email?.ToString(),
-                Nome = user.Nome,
+                Nome = user.Name,
                 PhoneNumber = user.PhoneNumber
             };
         }

@@ -5,7 +5,13 @@ namespace VibbraTest.Domain.Entity
 {
     public class User : EntityBase
     {
-        public string Nome { get; set; }
+        public const int NameMaxLenght = 100;
+        public const int EmailMaxLenght = 100;
+        public const int PasswordMaxLenght = 20;
+        public const int CompanyNameMaxLenght = 100;
+        public const int PhoneNumberMaxLenght = 20;
+
+        public string Name { get; set; }
         public Email Email { get; set; }
         public string Password { get; set; }
         public Cnpj Cnpj { get; set; }

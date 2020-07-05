@@ -29,7 +29,7 @@ namespace VibbraTest.Domain.Users
 
             var user = new User
             {
-                Nome = command.Nome,
+                Name = command.Name,
                 CompanyName = command.CompanyName,
                 Email = email,
                 PhoneNumber = command.PhoneNumber,
@@ -64,7 +64,7 @@ namespace VibbraTest.Domain.Users
                     throw new InvalidEntityException($"Já existe um usuário com o CNPJ {cnpj}");
             }
 
-            user.Nome = command.Nome;
+            user.Name = command.Name;
             user.PhoneNumber = command.PhoneNumber;
             user.Email = email;
             user.CompanyName = command.CompanyName;

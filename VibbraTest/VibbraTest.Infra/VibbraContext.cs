@@ -74,7 +74,7 @@ namespace VibbraTest.Infra
             modelBuilder.Entity<User>().HasData(new User
             {
                 Id = 1,
-                Nome = "Admin",
+                Name = "Admin",
                 Password = "Admin",
             });
         }
