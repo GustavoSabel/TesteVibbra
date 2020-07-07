@@ -1,4 +1,4 @@
-﻿namespace VibbraTest.Domain.Category.Dtos
+﻿namespace VibbraTest.Domain.Categories.Dtos
 {
     public class CategoryDto
     {

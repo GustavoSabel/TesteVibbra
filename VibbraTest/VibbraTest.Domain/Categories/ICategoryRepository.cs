@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using VibbraTest.Domain.Base;
 using VibbraTest.Domain.ValueObjects;
 
-namespace VibbraTest.Domain.Category
+namespace VibbraTest.Domain.Categories
 {
     public interface ICategoryRepository : IRepository<Category>
     {

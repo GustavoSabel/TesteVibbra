@@ -1,6 +1,6 @@
 ﻿using VibbraTest.Domain.Base;
 
-namespace VibbraTest.Domain.Category
+namespace VibbraTest.Domain.Categories
 {
     public class Category : EntityBase
     {

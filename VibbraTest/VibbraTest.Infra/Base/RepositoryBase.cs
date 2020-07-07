@@ -24,7 +24,7 @@ namespace VibbraTest.Infra.Base
         {
             var entity = await GetAsync(id);
             if (entity == null)
-                throw new BusinessException($"Entidade {id} não encontrada");
+                throw new BusinessException($"Registro não encontrada");
             Set.Remove(entity);
         }
 

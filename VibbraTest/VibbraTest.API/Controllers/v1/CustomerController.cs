@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VibbraTest.API.Dtos;
-using VibbraTest.Domain.Base;
 using VibbraTest.Domain.Customers;
 using VibbraTest.Domain.Customers.Commands;
 using VibbraTest.Domain.Customers.Dtos;

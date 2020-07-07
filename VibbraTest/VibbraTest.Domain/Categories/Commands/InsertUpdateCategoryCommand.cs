@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace VibbraTest.Domain.Category.Commands
+namespace VibbraTest.Domain.Categories.Commands
 {
     public class InsertUpdateCategoryCommand
     {

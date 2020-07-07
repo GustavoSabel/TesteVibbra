@@ -1,4 +1,4 @@
-﻿namespace VibbraTest.Domain.Category.Filters
+﻿namespace VibbraTest.Domain.Categories.Filters
 {
     public class CategoryFilter
     {

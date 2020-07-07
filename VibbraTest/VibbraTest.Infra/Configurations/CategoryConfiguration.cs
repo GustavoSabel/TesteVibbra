@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using VibbraTest.Domain.Category;
+using VibbraTest.Domain.Categories;
 
 namespace VibbraTest.Infra.Configurations
 {

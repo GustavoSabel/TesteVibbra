@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VibbraTest.Domain.Category;
-using VibbraTest.Domain.Category.Filters;
+using VibbraTest.Domain.Categories;
+using VibbraTest.Domain.Categories.Filters;
 using VibbraTest.Infra.Base;
 
 namespace VibbraTest.Infra.Repositories

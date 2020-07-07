@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
 using VibbraTest.API.Dtos;
-using VibbraTest.Domain.Category;
-using VibbraTest.Domain.Category.Commands;
-using VibbraTest.Domain.Category.Dtos;
-using VibbraTest.Domain.Category.Filters;
+using VibbraTest.Domain.Categories;
+using VibbraTest.Domain.Categories.Commands;
+using VibbraTest.Domain.Categories.Dtos;
+using VibbraTest.Domain.Categories.Filters;
 
 namespace VibbraTest.API.Controllers.v1
 {

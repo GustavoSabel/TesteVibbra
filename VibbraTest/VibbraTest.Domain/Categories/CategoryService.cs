@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
-using VibbraTest.Domain.Category.Commands;
+using VibbraTest.Domain.Categories.Commands;
 using VibbraTest.Domain.Exceptions;
-using VibbraTest.Domain.ValueObjects;
 
-namespace VibbraTest.Domain.Category
+namespace VibbraTest.Domain.Categories
 {
     public class CategoryService
     {

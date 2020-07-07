@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VibbraTest.Domain.Category.Dtos
+namespace VibbraTest.Domain.Categories.Dtos
 {
     public class CategoryListDto
     {
