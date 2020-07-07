@@ -44,10 +44,10 @@ namespace VibbraTest.API.Controllers.v1
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMessage))]
-        public async Task<ActionResult<CreatedEntityResult>> Post(InsertUpdateCategoryCommand command)
+        public async Task<ActionResult<CreatedEntityDto>> Post(InsertUpdateCategoryCommand command)
         {
             var category = await _categoryService.InsertAsync(command);
-            return new CreatedEntityResult(category.Id);
+            return new CreatedEntityDto(category.Id);
         }
 
         [HttpPut("{id}")]

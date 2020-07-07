@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using VibbraTest.API.Dtos;
+using VibbraTest.Domain.Configuration;
 using VibbraTest.Domain.Revenues;
 using VibbraTest.Domain.Revenues.Commands;
 using VibbraTest.Domain.Revenues.Dtos;
@@ -14,11 +15,13 @@ namespace VibbraTest.API.Controllers.v1
     {
         private readonly IRevenueRepository _revenueRepository;
         private readonly RevenueService _revenueService;
+        private readonly IConfigurationRepository _configurationRepository;
 
-        public RevenueController(IRevenueRepository revenueRepository, RevenueService revenueService)
+        public RevenueController(IRevenueRepository revenueRepository, RevenueService revenueService, IConfigurationRepository configurationRepository)
         {
             _revenueRepository = revenueRepository;
             _revenueService = revenueService;
+            _configurationRepository = configurationRepository;
         }
 
         [HttpGet("{id}")]
@@ -35,10 +38,10 @@ namespace VibbraTest.API.Controllers.v1
         [HttpPost("{customerId}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMessage))]
-        public async Task<ActionResult<CreatedEntityResult>> Post(int customerId, InsertUpdateRevenueCommand command)
+        public async Task<ActionResult<CreatedEntityDto>> Post(int customerId, InsertUpdateRevenueCommand command)
         {
             var revenue = await _revenueService.InsertAsync(customerId, command);
-            return new CreatedEntityResult(revenue.Id);
+            return new CreatedEntityDto(revenue.Id);
         }
 
         [HttpPut("{id}")]

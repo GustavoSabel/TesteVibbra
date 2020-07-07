@@ -1,8 +1,8 @@
 ﻿namespace VibbraTest.API.Dtos
 {
-    public struct CreatedEntityResult
+    public struct CreatedEntityDto
     {
-        public CreatedEntityResult(int revenueId)
+        public CreatedEntityDto(int revenueId)
         {
             Id = revenueId;
         }
