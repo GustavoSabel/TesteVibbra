@@ -64,7 +64,7 @@ namespace VibbraTest.Domain.Customers
                 throw new EntityNotFoundException("Customer");
 
             if (customer.Archived == true)
-                throw new BusinessException($"Customer {customer.CommercialName} is alread archived");
+                throw new BusinessException($"Customer {customer.CommercialName} is already archived");
 
             customer.Archived = true;
 

@@ -25,9 +25,15 @@ namespace VibbraTest.Domain.Expenses
             if (category == null)
                 throw new EntityNotFoundException("Category");
 
+            if (category.Archived)
+                throw new BusinessException($"Category {category.Name} is already archived");
+
             var customer = await _customerRepository.GetAsync(command.CustomerId);
             if (customer == null)
                 throw new EntityNotFoundException("Customer");
+
+            if (customer.Archived)
+                throw new BusinessException($"Customer {customer.CommercialName} is already archived");
 
             var expense = new Expense
             {

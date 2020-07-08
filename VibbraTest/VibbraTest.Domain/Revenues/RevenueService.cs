@@ -22,6 +22,9 @@ namespace VibbraTest.Domain.Revenues
             if (customer == null)
                 throw new EntityNotFoundException("Customer");
 
+            if (customer.Archived)
+                throw new BusinessException($"Customer {customer.CommercialName} is already archived");
+
             var revenue = new Revenue
             {
                 Customer = customer,
