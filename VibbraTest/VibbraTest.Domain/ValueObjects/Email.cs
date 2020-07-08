@@ -71,5 +71,7 @@ namespace VibbraTest.Domain.ValueObjects
                 return false;
             }
         }
+
+        public static implicit operator string(Email email) => email.Value;
     }
 }

@@ -67,7 +67,7 @@ namespace VibbraTest.API.Controllers.v1
                 Cnpj = user.Cnpj?.ToString(),
                 CompanyName = user.CompanyName,
                 Email = user.Email?.ToString(),
-                Nome = user.Name,
+                Name = user.Name,
                 PhoneNumber = user.PhoneNumber
             };
         }

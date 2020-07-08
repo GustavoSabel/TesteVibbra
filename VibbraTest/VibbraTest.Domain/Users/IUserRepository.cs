@@ -9,7 +9,9 @@ namespace VibbraTest.Domain.Users
     public interface IUserRepository : IRepository<User>
     {
         Task<List<User>> GetAll();
+        Task<User> GetByNameAsync(string name);
         Task<User> GetByEmailAsync(Email email);
         Task<User> GetByEmailCnpj(Cnpj cnpj);
+        Task<User> GetByNameOrEmailAsync(string nameOrEmail);
     }
 }

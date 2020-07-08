@@ -7,7 +7,7 @@ namespace VibbraTest.Domain.Entity
     {
         public const int NameMaxLenght = 100;
         public const int EmailMaxLenght = 100;
-        public const int PasswordMaxLenght = 20;
+        public const int PasswordMaxLenght = 100;
         public const int CompanyNameMaxLenght = 100;
         public const int PhoneNumberMaxLenght = 20;
 

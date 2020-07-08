@@ -7,6 +7,7 @@ using VibbraTest.Domain.Configuration;
 using VibbraTest.Domain.Customers;
 using VibbraTest.Domain.Entity;
 using VibbraTest.Domain.Expenses;
+using VibbraTest.Domain.Helpers;
 using VibbraTest.Domain.Revenues;
 
 namespace VibbraTest.Infra
@@ -83,7 +84,7 @@ namespace VibbraTest.Infra
             {
                 Id = 1,
                 Name = "Admin",
-                Password = "Admin",
+                Password = PasswordHelper.GenerateHash("Admin"),
             });
 
             modelBuilder.Entity<Configuration>().HasData(new Configuration

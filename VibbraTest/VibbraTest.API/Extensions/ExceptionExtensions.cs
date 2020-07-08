@@ -22,9 +22,9 @@ namespace VibbraTest.API.Extensions
                     {
                         if (exceptionHandlerPathFeature.Error is BusinessException ex)
                         {
-                            var errorMessage = new ErrorMessage((string)ex.Message);
+                            var errorMessage = new ErrorMessage(ex.Message);
 
-                            context.Response.StatusCode = 400;
+                            context.Response.StatusCode = (int)ex.HttpStatusCode;
                             context.Response.ContentType = "application/json";
                             await context.Response.WriteAsync(JsonSerializer.Serialize(errorMessage));
                             return;

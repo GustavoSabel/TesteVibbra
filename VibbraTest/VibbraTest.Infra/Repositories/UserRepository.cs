@@ -24,9 +24,19 @@ namespace VibbraTest.Infra.Repositories
             return Set.FirstOrDefaultAsync(x => x.Email == email);
         }
 
+        public Task<User> GetByNameAsync(string name)
+        {
+            return Set.FirstOrDefaultAsync(x => x.Name == name);
+        }
+
         public Task<User> GetByEmailCnpj(Cnpj cnpj)
         {
             return Set.FirstOrDefaultAsync(x => x.Cnpj == cnpj);
+        }
+
+        public Task<User> GetByNameOrEmailAsync(string nameOrEmail)
+        {
+            return Set.FirstOrDefaultAsync(x => x.Name == nameOrEmail || x.Email == nameOrEmail);
         }
     }
 }
