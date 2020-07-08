@@ -37,7 +37,7 @@ namespace VibbraTest.API.Controllers.v1
         {
             var user = await _userRepository.GetAsync(id);
             if (user == null)
-                return BadRequest(new ErrorMessage($"Usuário não encontrado"));
+                return BadRequest(new ErrorMessage("User not found"));
             return ConvertToDto(user);
         }
 

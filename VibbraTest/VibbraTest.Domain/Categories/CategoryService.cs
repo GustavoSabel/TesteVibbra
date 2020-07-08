@@ -19,7 +19,7 @@ namespace VibbraTest.Domain.Categories
 
             var existingCategory = await _categoryRepository.GetByNameAsync(command.Name);
             if (existingCategory != null)
-                throw new InvalidEntityException($"Já existe uma categoria com o nome {command.Name}");
+                throw new BusinessException($"Category {command.Name} already exists");
 
             var category = new Category
             {
@@ -37,13 +37,13 @@ namespace VibbraTest.Domain.Categories
 
             var category = await _categoryRepository.GetAsync(id);
             if (category == null)
-                throw new EntityNotFoundException("Categoria não encontrado");
+                throw new EntityNotFoundException("Category");
 
             if (category.Name != command.Name)
             {
                 var existingCategory = await _categoryRepository.GetByNameAsync(command.Name);
                 if (existingCategory != null)
-                    throw new InvalidEntityException($"Já existe uma empresa com o nome {command.Name}");
+                    throw new BusinessException($"Category {command.Name} already exists");
             }
 
             category.Name = command.Name;
@@ -57,10 +57,10 @@ namespace VibbraTest.Domain.Categories
         {
             var category = await _categoryRepository.GetAsync(id);
             if (category == null)
-                throw new EntityNotFoundException("Empresa não encontrado");
+                throw new EntityNotFoundException("Company");
 
             if (category.Archived == true)
-                throw new BusinessException($"Categoria {category.Name} já está arquivada");
+                throw new BusinessException($"Category is already archived");
 
             category.Archived = true;
 

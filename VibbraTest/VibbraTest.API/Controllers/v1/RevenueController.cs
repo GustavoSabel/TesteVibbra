@@ -31,7 +31,7 @@ namespace VibbraTest.API.Controllers.v1
         {
             var revenue = await _revenueRepository.GetAsync(id);
             if (revenue == null)
-                return BadRequest(new ErrorMessage($"Receita não encontrada"));
+                return BadRequest(new ErrorMessage("Revenue not found"));
             return ConvertToDto(revenue);
         }
 

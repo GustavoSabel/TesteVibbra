@@ -37,7 +37,7 @@ namespace VibbraTest.API.Controllers.v1
         {
             var customer = await _customerRepository.GetAsync(id);
             if (customer == null)
-                return BadRequest(new ErrorMessage($"Empresa não encontrada"));
+                return BadRequest(new ErrorMessage("Customer not found"));
             return ConvertToDto(customer);
         }
 

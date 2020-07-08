@@ -9,10 +9,10 @@ namespace VibbraTest.Domain.ValueObjects
         public Email(string value)
         {
             if (string.IsNullOrWhiteSpace(value))
-                throw new InvalidEntityException("E-mail não informado");
+                throw new BusinessException("E-mail not found");
 
             if(!IsValidEmail(value))
-                throw new InvalidEntityException($"E-mail {value} inválido");
+                throw new BusinessException($"E-mail {value} is inválid");
 
             Value = value.ToLowerInvariant().Trim();
         }

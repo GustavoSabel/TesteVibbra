@@ -37,7 +37,7 @@ namespace VibbraTest.API.Controllers.v1
         {
             var expense = await _expenseRepository.GetAsync(id);
             if (expense == null)
-                return BadRequest(new ErrorMessage($"Despesa não encontrada"));
+                return BadRequest(new ErrorMessage("Expense not found"));
             return ConvertToDto(expense);
         }
 

@@ -8,12 +8,12 @@ namespace VibbraTest.Domain.ValueObjects
         public Cnpj(string valor)
         {
             if (string.IsNullOrWhiteSpace(valor))
-                throw new InvalidEntityException("CNPJ não informado");
+                throw new BusinessException("CNPJ not found");
 
             var valorApenasNumeros = GetOnlyNumbers(valor);
 
             if(!Validate(valorApenasNumeros))
-                throw new InvalidEntityException($"CNPJ {valor} inválido");
+                throw new BusinessException($"CNPJ {valor} is invalid");
 
             Value = valorApenasNumeros;
         }

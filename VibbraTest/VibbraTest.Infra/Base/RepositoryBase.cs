@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Specialized;
 using System.Threading.Tasks;
 using VibbraTest.Domain.Base;
 using VibbraTest.Domain.Exceptions;
@@ -24,7 +25,7 @@ namespace VibbraTest.Infra.Base
         {
             var entity = await GetAsync(id);
             if (entity == null)
-                throw new BusinessException($"Registro não encontrada");
+                throw new EntityNotFoundException(typeof(T).Name);
             Set.Remove(entity);
         }
 

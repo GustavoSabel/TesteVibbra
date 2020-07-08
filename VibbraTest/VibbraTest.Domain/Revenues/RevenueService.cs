@@ -20,7 +20,7 @@ namespace VibbraTest.Domain.Revenues
         {
             var customer = await _customerRepository.GetAsync(customerId);
             if (customer == null)
-                throw new BusinessException($"Empresa não encontrada");
+                throw new EntityNotFoundException("Customer");
 
             var revenue = new Revenue
             {
@@ -42,7 +42,7 @@ namespace VibbraTest.Domain.Revenues
         {
             var revenue = await _revenueRepository.GetAsync(revenueId);
             if (revenue == null)
-                throw new BusinessException($"Receita não encontrada");
+                throw new EntityNotFoundException("Revenue");
 
             revenue.AccrualDate = command.AccrualDate;
             revenue.Amount = command.Amount;

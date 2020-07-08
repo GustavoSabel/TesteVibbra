@@ -23,11 +23,11 @@ namespace VibbraTest.Domain.Expenses
         {
             var category = await _categoryRepository.GetAsync(categoryId);
             if (category == null)
-                throw new EntityNotFoundException("Categoria não encontrada");
+                throw new EntityNotFoundException("Category");
 
             var customer = await _customerRepository.GetAsync(command.CustomerId);
             if (customer == null)
-                throw new EntityNotFoundException("Empresa não encontrada");
+                throw new EntityNotFoundException("Customer");
 
             var expense = new Expense
             {
@@ -49,11 +49,11 @@ namespace VibbraTest.Domain.Expenses
         {
             var expense = await _expenseRepository.GetAsync(expenseId);
             if (expense == null)
-                throw new EntityNotFoundException("Despesa não encontrada");
+                throw new EntityNotFoundException("Expense");
 
             var customer = await _customerRepository.GetAsync(command.CustomerId);
             if (customer == null)
-                throw new EntityNotFoundException("Empresa não encontrada");
+                throw new EntityNotFoundException("Customer");
 
             expense.Amount = command.Amount;
             expense.AccrualDate = command.AccrualDate;

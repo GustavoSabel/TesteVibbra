@@ -21,11 +21,11 @@ namespace VibbraTest.Domain.Users
 
             var userExisting = await _userRepository.GetByEmailAsync(email);
             if (userExisting != null)
-                throw new InvalidEntityException($"Já existe um usuário com o e-mail {command.Email}");
+                throw new BusinessException($"User already exists with e-mail {command.Email}");
 
             userExisting = await _userRepository.GetByEmailCnpj(cnpj);
             if (userExisting != null)
-                throw new InvalidEntityException($"Já existe um usuário com o CNPJ {cnpj}");
+                throw new BusinessException($"User already exists with CNPJ {cnpj}");
 
             var user = new User
             {
@@ -48,20 +48,20 @@ namespace VibbraTest.Domain.Users
 
             var user = await _userRepository.GetAsync(id);
             if (user == null)
-                throw new EntityNotFoundException("Usuário não encontrado");
+                throw new EntityNotFoundException("User");
 
             if (user.Email != email)
             {
                 var userExisting = await _userRepository.GetByEmailAsync(email);
                 if (userExisting != null)
-                    throw new InvalidEntityException($"Já existe um usuário com o e-mail {email}");
+                    throw new BusinessException($"User already exists with e-mail {email}");
             }
 
             if (user.Cnpj != cnpj)
             {
                 var userExisting = await _userRepository.GetByEmailCnpj(cnpj);
                 if (userExisting != null)
-                    throw new InvalidEntityException($"Já existe um usuário com o CNPJ {cnpj}");
+                    throw new BusinessException($"User already exists with CNPJ {cnpj}");
             }
 
             user.Name = command.Name;

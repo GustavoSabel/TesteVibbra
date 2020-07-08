@@ -24,7 +24,7 @@ namespace VibbraTest.API.Controllers.v1
         }
 
         [HttpGet]
-        public async Task<CategoryListDto> Get([FromQuery]CategoryFilter filter)
+        public async Task<CategoryListDto> Get([FromQuery] CategoryFilter filter)
         {
             var category = await _categoryRepository.GetAll(filter);
             return new CategoryListDto(category.Select(x => ConvertToDto(x)).ToList());
@@ -37,7 +37,7 @@ namespace VibbraTest.API.Controllers.v1
         {
             var category = await _categoryRepository.GetAsync(id);
             if (category == null)
-                return BadRequest(new ErrorMessage($"Categoria não encontrada"));
+                return BadRequest(new ErrorMessage("Category not found"));
             return ConvertToDto(category);
         }
 

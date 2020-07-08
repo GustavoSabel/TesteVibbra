@@ -11,9 +11,9 @@ namespace VibbraTest.API.Extensions
     {
         public static void UseExceptionHandlerVibbra(this IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)
         {
-            app.UseExceptionHandler(errorApp =>
+            app.UseExceptionHandler((System.Action<IApplicationBuilder>)(errorApp =>
             {
-                errorApp.Run(async context =>
+                errorApp.Run((RequestDelegate)(async context =>
                 {
                     var exceptionHandlerPathFeature =
                         context.Features.Get<IExceptionHandlerPathFeature>();
@@ -22,7 +22,7 @@ namespace VibbraTest.API.Extensions
                     {
                         if (exceptionHandlerPathFeature.Error is BusinessException ex)
                         {
-                            var errorMessage = new ErrorMessage(ex.Message);
+                            var errorMessage = new ErrorMessage((string)ex.Message);
 
                             context.Response.StatusCode = 400;
                             context.Response.ContentType = "application/json";
@@ -42,8 +42,8 @@ namespace VibbraTest.API.Extensions
                     context.Response.StatusCode = 500;
                     context.Response.ContentType = "text/html";
                     context.Response.ContentType = "An error occurred";
-                });
-            });
+                }));
+            }));
         }
     }
 }

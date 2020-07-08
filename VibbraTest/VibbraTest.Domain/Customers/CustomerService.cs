@@ -21,7 +21,7 @@ namespace VibbraTest.Domain.Customers
 
             var existingCustomer = await _customerRepository.GetByCnpjAsync(cnpj);
             if (existingCustomer != null)
-                throw new InvalidEntityException($"Já existe uma empresa com o cnpj {cnpj}");
+                throw new BusinessException($"Customer already exists with CNPJ {cnpj}");
 
             var customer = new Customer
             {
@@ -40,13 +40,13 @@ namespace VibbraTest.Domain.Customers
 
             var customer = await _customerRepository.GetAsync(id);
             if (customer == null)
-                throw new EntityNotFoundException("Empresa não encontrado");
+                throw new EntityNotFoundException("Customer");
 
             if (customer.Cnpj != cnpj)
             {
                 var existingCustomer = await _customerRepository.GetByCnpjAsync(cnpj);
                 if (existingCustomer != null)
-                    throw new InvalidEntityException($"Já existe uma empresa com o cnpj {cnpj}");
+                    throw new BusinessException($"Customer already exists with CNPJ {cnpj}");
             }
 
             customer.Cnpj = cnpj;
@@ -61,10 +61,10 @@ namespace VibbraTest.Domain.Customers
         {
             var customer = await _customerRepository.GetAsync(id);
             if (customer == null)
-                throw new EntityNotFoundException("Empresa não encontrado");
+                throw new EntityNotFoundException("Customer");
 
             if (customer.Archived == true)
-                throw new BusinessException($"Empresa {customer.CommercialName} já está arquivada");
+                throw new BusinessException($"Customer {customer.CommercialName} is alread archived");
 
             customer.Archived = true;
 
