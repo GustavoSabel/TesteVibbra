@@ -5,6 +5,9 @@ Planilha com os tempos para desenvolver o sistema [aqui](https://docs.google.com
 
 Dias estimados para ficar pronto: 5
 
+## Demonstração
+Vídeo demonstrando a API funcionando: [https://youtu.be/SfiozbOSE2o](https://youtu.be/SfiozbOSE2o)
+
 ## Tecnologias utilizadas:
  - ASP.NET Core
  - Entity Framework Core
