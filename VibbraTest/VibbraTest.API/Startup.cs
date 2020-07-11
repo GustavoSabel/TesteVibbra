@@ -70,7 +70,7 @@ namespace VibbraTest.API
                  .Select(x => new FieldValidation(x.Key, x.Value.Errors.FirstOrDefault().ErrorMessage))
                  .ToArray();
 
-            var errorMessage = new ErrorMessage("Alguns campos estão inválidos", fieldValidations);
+            var errorMessage = new ErrorMessage(fieldValidations[0].Error, fieldValidations);
 
             return new BadRequestObjectResult(errorMessage);
         }
