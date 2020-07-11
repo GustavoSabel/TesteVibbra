@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using VibbraTest.API.Dtos;
-using VibbraTest.Domain.Configuration;
 using VibbraTest.Domain.Revenues;
 using VibbraTest.Domain.Revenues.Commands;
 using VibbraTest.Domain.Revenues.Dtos;
@@ -15,13 +15,19 @@ namespace VibbraTest.API.Controllers.v1
     {
         private readonly IRevenueRepository _revenueRepository;
         private readonly RevenueService _revenueService;
-        private readonly IConfigurationRepository _configurationRepository;
 
-        public RevenueController(IRevenueRepository revenueRepository, RevenueService revenueService, IConfigurationRepository configurationRepository)
+        public RevenueController(IRevenueRepository revenueRepository, RevenueService revenueService)
         {
             _revenueRepository = revenueRepository;
             _revenueService = revenueService;
-            _configurationRepository = configurationRepository;
+        }
+
+        [HttpGet()]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMessage))]
+        public async Task<ActionResult<List<RevenueDto>>> Get()
+        {
+            return await _revenueRepository.GetAll();
         }
 
         [HttpGet("{id}")]

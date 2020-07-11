@@ -49,5 +49,19 @@ namespace VibbraTest.Infra.Repositories
                 MonthRevenue = x.MonthRevenue,
             }).ToList();
         }
+
+        public Task<List<RevenueDto>> GetAll()
+        {
+            return Set.Select(x => new RevenueDto
+            {
+                Id = x.Id,
+                AccrualDate = x.AccrualDate,
+                Amount = x.Amount,
+                Customer = x.Customer.CommercialName,
+                Description = x.Description,
+                InvoiceId = x.InvoiceId,
+                TransactionDate  = x.TransactionDate,
+            }).ToListAsync();
+        }
     }
 }

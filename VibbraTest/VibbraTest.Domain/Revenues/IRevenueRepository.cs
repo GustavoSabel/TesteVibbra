@@ -10,5 +10,6 @@ namespace VibbraTest.Domain.Revenues
         Task<decimal> GetRevenueOfYearAsync(int year);
         Task<List<RevenueByMonthDto>> GetByMonthAsync(int fiscalYear);
         Task<List<RevenueByCustomerDto>> GetByCustomerAsync(int fiscalYear);
+        Task<List<RevenueDto>> GetAll();
     }
 }
