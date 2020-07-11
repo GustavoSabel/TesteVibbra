@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VibbraTest.API.Dtos;
@@ -24,10 +23,10 @@ namespace VibbraTest.API.Controllers.v1
         }
 
         [HttpGet]
-        public async Task<List<UserDto>> Get()
+        public async Task<UserListDto> Get()
         {
             var user = await _userRepository.GetAll();
-            return user.Select(x => ConvertToDto(x)).ToList();
+            return new UserListDto(user.Select(x => ConvertToDto(x)).ToList());
         }
 
         [HttpGet("{id}")]

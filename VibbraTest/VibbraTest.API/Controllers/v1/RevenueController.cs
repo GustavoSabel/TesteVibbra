@@ -25,9 +25,9 @@ namespace VibbraTest.API.Controllers.v1
         [HttpGet()]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMessage))]
-        public async Task<ActionResult<List<RevenueDto>>> Get()
+        public async Task<ActionResult<RevenueDtoListDto>> Get()
         {
-            return await _revenueRepository.GetAll();
+            return new RevenueDtoListDto(await _revenueRepository.GetAll());
         }
 
         [HttpGet("{id}")]
