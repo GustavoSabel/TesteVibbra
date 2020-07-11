@@ -24,3 +24,4 @@ Ao executar o sistema, o banco de dados deve ser criado automaticamente.
 Caso o sistema não consiga criar o banco por causa de alguma permissão, 
 você terá que criar o banco `GustavoVibbraTestDb` manualmente.
 
+Por padrão no sistema já vai vir cadastrado um usuário `Admin` com a senha `Admin` para facilitar os testes
