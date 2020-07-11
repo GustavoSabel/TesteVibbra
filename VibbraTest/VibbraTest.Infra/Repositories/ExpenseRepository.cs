@@ -24,7 +24,7 @@ namespace VibbraTest.Infra.Repositories
                 Amount = x.Amount,
                 TransactionDate = x.TransactionDate,
                 Customer = x.Customer.CommercialName,
-                Category = x.Category.Description,
+                Category = x.Category.Name,
             }).ToListAsync();
         }
     }

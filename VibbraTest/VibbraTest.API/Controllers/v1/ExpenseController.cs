@@ -78,7 +78,7 @@ namespace VibbraTest.API.Controllers.v1
                 Amount = expense.Amount,
                 TransactionDate = expense.TransactionDate,
                 Customer = expense.Customer.CommercialName,
-                Category = expense.Category.Description,
+                Category = expense.Category.Name,
             };
         }
     }
