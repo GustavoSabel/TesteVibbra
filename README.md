@@ -1,10 +1,5 @@
 # TESTE TÉCNICO - Desenvolvedor Back end: Sistema de controle de Notas Fiscais para Freelancer
 
-## Estimativa
-Planilha com os tempos para desenvolver o sistema [aqui](https://docs.google.com/spreadsheets/d/1UC8sKDO7HpnXh-IuNlwq35IRzeE4-xD6c_shmpdYgFI/edit#gid=0)
-
-Dias estimados para ficar pronto: 5
-
 ## Demonstração
 Vídeo demonstrando a API funcionando: [https://youtu.be/SfiozbOSE2o](https://youtu.be/SfiozbOSE2o)
 
@@ -14,6 +9,8 @@ Vídeo demonstrando a API funcionando: [https://youtu.be/SfiozbOSE2o](https://yo
  - SQL Server
 
 ## Configura para executar o sistema
+Precisa ter o [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1) instalado
+
 Por padrão o arquivo vai se conectar na instancia `.\SQLEXPRESS` usando autenticação do windows.
 O nome do banco de dados será como `GustavoVibbraTestDb`.
 
